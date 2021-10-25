@@ -1,0 +1,55 @@
+.navbarWrapper,
+.navbarWrapperAuthed {
+    height: 80px;
+    background-color: black;
+    display: flex;
+    color: white;
+    align-items: center;
+}
+
+.navbar-row {
+    display: flex;
+    height: 100%;
+    width: 80%;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 80px;
+    width: 100%;
+    background-color: black;
+    z-index: 10;
+    padding: 4px 8px;
+}
+
+.nav-col {
+    max-width: 33.3%;
+    flex: 33.3%;
+}
+
+.col-left {}
+
+.col-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.col-center > a{
+    margin: 0 8px;
+}
+
+.col-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.col-right > img {
+    margin-right: 16px;
+}
+.col-right > p{
+    margin: 0 8px;
+}
