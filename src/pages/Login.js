@@ -15,7 +15,7 @@ import {Link} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import { useHistory } from "react-router";
 
-import hero from '../assets/hero2.svg';
+import catdog from '../assets/catdog.jpg';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -43,10 +43,12 @@ export default function Login() {
 
   return (
     <Box  w="100%">
+      
       <Grid h="100%" templateColumns="repeat(2, 1fr)" gap={0}>
         <Box w="100%" display="flex" alignItems="center" justifyContent="center">
+        
         <Box w="80%">
-        <img src={hero} />
+        <img src={catdog} />
         </Box>
         </Box>
         <Box>
@@ -76,18 +78,21 @@ export default function Login() {
               <Button
                 isFullWidth={true}
                 onClick={handleLoginUser}
-                colorScheme="purple"
+                colorScheme="cyan"
                 size="md"
               >
                 Login
               </Button>
               <Link to="/forgot-password">Forgot password?</Link>
+              <Center w="100%">
+      <p style={{"color": "red", "fontSize" : "20px", "margin": "12px"}} ref={status}></p>
+      </Center>
             </VStack>
           </Center>
         </Box>
       </Grid>
 
-      <p ref={status}></p>
+      
     </Box>
   );
 }

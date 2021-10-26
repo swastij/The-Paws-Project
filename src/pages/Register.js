@@ -18,7 +18,7 @@ import {
 
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import hero from '../assets/hero2.svg';
+import catdog from "../assets/catdog.jpg";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -29,42 +29,35 @@ export default function Register() {
   const usernameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const profile_picRef = useRef();
-  const aboutRef = useRef();
-  const genderRef = useRef();
-  const ageRef = useRef();
-  const locationRef = useRef();
+  const stateRef = useRef();
+  const phoneRef = useRef();
+  const addressRef = useRef();
+  const isFeederRef = useRef();
+
   let button;
-  const history=useHistory();
+  const history = useHistory();
   const handleCreateUser = async () => {
     setLoading(true);
     try {
       const user = {
-        firstname: firstnameRef.current.value,
-        lastname: lastnameRef.current.value,
+        first_name: firstnameRef.current.value,
+        last_name: lastnameRef.current.value,
         username: usernameRef.current.value,
         email: emailRef.current.value,
         password: passwordRef.current.value,
-        profile_pic: "",
-        about: "Hey there, I am using this app!",
-        gender: parseInt(genderRef.current.value),
-        age: parseInt(ageRef.current.value),
-        location: "",
+        phone: phoneRef.current.value,
+        state: stateRef.current.value,
+        address: addressRef.current.value,
+        isFeeder: isFeederRef.current.value,
       };
       const res = await register(user);
-      dispatch({ type: "SAVE_USER", payload: res });
+      console.log(res);
+      dispatch({ type: "SAVE_USER", payload: { user: res } });
       status.current.innerHTML = "Account created";
-      history.push('/home');
+      history.push("/home");
     } catch (e) {
-      if (e.response.status === 401) {
-        console.log(e.response.data);
-        status.current.innerHTML = Object.entries(e.response.data).map(
-          (e) => e[0] + ": " + e[1] + "<br/>"
-        );
-        console.log(Object.entries(e.response.data));
-      } else if (e.response.status === 500) {
-        status.current.innerHTML = e.response.data;
-      }
+      console.log(e);
+      status.current.innerHTML = e.response?.data?.message;
       setLoading(false);
     }
   };
@@ -111,10 +104,15 @@ export default function Register() {
   return (
     <Box w="100%">
       <Grid h="100%" templateColumns="repeat(2, 1fr)" gap={0}>
-      <Box w="100%" display="flex" alignItems="center" justifyContent="center">
-        <Box w="80%">
-        <img src={hero} />
-        </Box>
+        <Box
+          w="100%"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box w="80%">
+            <img src={catdog} />
+          </Box>
         </Box>
         <Box>
           <Center h="100%" w="100%">
@@ -154,6 +152,36 @@ export default function Register() {
                 size="md"
               />
               <Spacer />
+              <Input
+                ref={phoneRef}
+                variant="outline"
+                placeholder="Phone Number"
+                size="md"
+              />
+              <Spacer />
+              <Input
+                ref={addressRef}
+                variant="outline"
+                placeholder="Address"
+                size="md"
+              />
+              <Spacer />
+              <Select
+                ref={isFeederRef}
+                variant="outline"
+                placeholder="Are you a feeder?"
+              >
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+              </Select>
+              <Spacer />
+              <Input
+                ref={stateRef}
+                variant="outline"
+                placeholder="State"
+                size="md"
+              />
+              <Spacer />
               {/* <NumberInput size="md" maxw={16} defaultValue={0} min={0} max={2}>
             <NumberInputField ref={genderRef} placeholder="Gender" />
             <NumberInputStepper>
@@ -162,26 +190,26 @@ export default function Register() {
             </NumberInputStepper>
           </NumberInput> */}
 
-              <Select ref={genderRef} placeholder="Select gender">
+              {/* <Select ref={genderRef} placeholder="Select gender">
                 <option value="0">Female</option>
                 <option value="1">Male</option>
                 <option value="2">Others</option>
               </Select>
-              <Spacer />
+              <Spacer /> */}
               {/* <Input
                 ref={profile_picRef}
                 variant="outline"
                 placeholder="Profile Pic"
                 size="md"
               /> */}
-              <Spacer />
+              {/* <Spacer /> */}
               {/* <Textarea
                 ref={aboutRef}
                 variant="outline"
                 placeholder="About"
                 size="md"
               /> */}
-              <Spacer />
+              {/* <Spacer />
               <NumberInput
                 // isFullWidth={true}
                 size="md"
@@ -200,7 +228,7 @@ export default function Register() {
                   <NumberDecrementStepper />
                 </NumberInputStepper>
               </NumberInput>
-              <Spacer />
+              <Spacer /> */}
               {/* <Input
                 ref={locationRef}
                 variant="outline"
@@ -212,7 +240,7 @@ export default function Register() {
               <Button
                 isFullWidth={true}
                 onClick={handleCreateUser}
-                colorScheme="purple"
+                colorScheme="cyan"
                 size="md"
               >
                 Register

@@ -27,17 +27,17 @@ export default function Post(token) {
   return (
     <Box w="600px" maxW="95%" m="auto">
       
-      { post && 
+      {/* { post &&  */}
       <PostCard
             whichPage={1}
-            postId={post.id}
+            postId={1}
             user={post.user}
-            caption={post.caption}
-            createdAt={post.created_at}
-            media={post.media}
-            mediaType={post.mediaType}
+            caption={"HOLA"}
+            createdAt={new Date().toDateString()}
+            media={null}
+            mediaType={1}
             ></PostCard>
-      }
+      {/* } */}
     </Box>
   );
 }

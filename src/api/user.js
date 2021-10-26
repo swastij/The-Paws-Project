@@ -1,19 +1,23 @@
 import {
     FORMClient,
-    JSONClient
+    JSONClient,
+    URLEncodedClient
 } from './bootstrap';
+import qs from "qs";
+
 
 export const register = async (user) => {
     try {
-        const res = await JSONClient.post('/user/register', user);
+        const res = await URLEncodedClient.post('/register', qs.stringify(user));
         return res.data;
+        console.log(res)
     } catch (e) {
         throw e;
     }
 }
 export const login = async (user) => {
     try {
-        const res = await JSONClient.post('/user/login', user);
+        const res = await JSONClient.post('/login', user);
         return res.data;
     } catch (e) {
         throw e;

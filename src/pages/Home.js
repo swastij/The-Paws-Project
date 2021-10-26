@@ -88,17 +88,6 @@ export default function Home() {
   }, [userStore]);
 
   useEffect(()=>{
-    // yahan error isliye aarha h kyuki ye 2 baar chlega
-    // ek init hote hi.. as a constructor or second time jb b 
-    // all posts change hoga..
-
-    // koi b ueEffect ho.. wo init hote hi run hoga hi hoga
-    // frk nhi pdta dependency list me kya h
-    // empty list ho ya bhara ho.. init pr chlega wo pkka 100%
-    
-    // is condition se kaam nhi chlega 
-    // btaoo kyn ?
-
     
     if(allPosts.length > 0){
     console.log("pro pic ", allPosts[0].user);
@@ -155,14 +144,16 @@ export default function Home() {
         allPosts && allPosts.map((post, index) => (
           <PostCard
             whichPage={0}
-            key={index}
-            postId={post.id}
-            user={post.user}
-            caption={post.caption}
-            createdAt={post.created_at}
-            media={post.media}
-            mediaType={post.mediaType}
-          />
+            key={0}
+            postId={1}
+            user={{
+              username: "test"
+            }}
+            caption={"test"}
+            createdAt={new Date().toDateString()}
+            media={null}
+            mediaType={0}
+          />  
         ))}
     </Box>
   );

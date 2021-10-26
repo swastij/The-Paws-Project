@@ -7,6 +7,12 @@ export const JSONClient = axios.create({
     }
 })
 
+export const URLEncodedClient = axios.create({
+    baseURL: 'http://localhost:5000',
+    headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+    }
+})
 
 export const FORMClient = axios.create({
     baseURL: 'http://localhost:5000',

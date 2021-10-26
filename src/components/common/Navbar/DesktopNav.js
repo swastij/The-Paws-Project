@@ -41,11 +41,11 @@ export default function DesktopNav() {
         
         <Box justifyContent="space-around" className="navbar-row" >
         
-          <Box onClick={() => handleRouteChange("/")}>Home</Box>
+          <Box cursor="pointer" onClick={() => handleRouteChange("/")}>Home</Box>
 
-          <Box onClick={() => handleRouteChange("/login")}>Login</Box>
+          <Box cursor="pointer" onClick={() => handleRouteChange("/login")}>Login</Box>
 
-          <Box onClick={() => handleRouteChange("/register")}>Register</Box>
+          <Box cursor="pointer" onClick={() => handleRouteChange("/register")}>Register</Box>
         </Box>
       </div>
     );
@@ -56,16 +56,15 @@ export default function DesktopNav() {
         <div className="nav-col">Logo</div>
         <div className="nav-col col-center">
           <Link to="/home">Home</Link>
-          <Link>Chat</Link>
-          <Link to="notification">Notificatons</Link>
+          <Link >Feeders</Link>
           <Link to="profile">Profile</Link>
         </div>
         <div className="nav-col col-right">
-          <img
+          {/* <img
             style={{lineHeight: '40px', height: 40, width: 40, borderRadius: "50%", textAlign:"center" }}
             src={`http://localhost:5000/file/${userStore.user.profile_pic}`}
             alt="dp"
-          />
+          /> */}
           <p>{userStore.user.username}</p>
           <p onClick={handleLogout}>Logout</p>
         </div>

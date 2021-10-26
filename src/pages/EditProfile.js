@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { edit } from "../api/user";
+import propic from "../assets/propic.jpg";
 import {
   Input,
   Image,
@@ -21,25 +22,26 @@ import {
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
+
 export default function EditProfile() {
   const history = useHistory();
   const userStore = useSelector((store) => store.userStore);
   const dispatch = useDispatch();
   const status = useRef();
   const imgRef = useRef();
-  const [firstname, setFirstname] = useState(userStore.user.firstname);
-  const [lastname, setLastname] = useState(userStore.user.lastname);
+  const [firstname, setFirstname] = useState(userStore.user.first_name);
+  const [lastname, setLastname] = useState(userStore.user.last_name);
   const [username, setUsername] = useState(userStore.user.username);
-  const [gender, setGender] = useState(userStore.user.gender);
-  const [about, setAbout] = useState(userStore.user.about);
-  const [age, setAge] = useState(userStore.user.age);
+  const [isFeeder, setIsFeeder] = useState(userStore.user.isFeeder);
+  const [address, setAddress] = useState(userStore.user.address);
+  const [phone, setPhone] = useState(userStore.user.phone);
   const [location, setLocation] = useState(userStore.user.location);
   const [profile_pic, setProfilePic] = useState(userStore.user.profile_pic);
 
   let button;
 
   useEffect(() => {
-    imgRef.current.value = userStore.user.profile_pic;
+    imgRef.current.value = propic;
     button = (
       <Button isFullWidth={true} colorScheme="teal" size="md">
         Edit
@@ -62,9 +64,9 @@ export default function EditProfile() {
         lastname: lastname,
         username: username,
         profile_pic: profile_pic,
-        about: about,
-        gender: parseInt(gender),
-        age: parseInt(age),
+        address: address,
+        gender: isFeeder,
+        phone: parseInt(phone),
         location: location,
       };
 
@@ -139,46 +141,28 @@ export default function EditProfile() {
               />
               <Spacer />
               <Input
-                onChange={(e) => setAbout(e.target.value)}
+                onChange={(e) => setAddress(e.target.value)}
                 variant="outline"
-                value={about}
+                value={address}
                 size="md"
               />
               <Spacer />
 
               <Select
-                onChange={(e) => setGender(e.target.value)}
-                placeholder="Select gender"
+                onChange={(e) => setIsFeeder(e.target.value)}
+                placeholder="Are you a feeder?"
               >
-                <option value="0">Female</option>
-                <option value="1">Male</option>
-                <option value="2">Others</option>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
               </Select>
 
               <Spacer />
-              <Box display="flex" flexDirection="row">
-              <Box w="25%" m="auto"> AGE: </Box>
-              <Box w="70%">
-              <NumberInput
-                // isFullWidth={true}
+              <Input
+                onChange={(e) => setPhone(e.target.value)}
+                variant="outline"
+                placeholder="Phone Number"
                 size="md"
-                maxw={16}
-                defaultValue={age}
-                min={18}
-                max={100}
-              >
-                <NumberInputField
-                  isFullWidth={true}
-                  onChange={(e) => setAge(e.target.value)}
-                  placeholder="Age"
-                />
-                <NumberInputStepper>
-                  <NumberIncrementStepper />
-                  <NumberDecrementStepper />
-                </NumberInputStepper>
-              </NumberInput>
-              </Box>
-              </Box>
+              />
               <Spacer />
               <Input
                 onChange={(e) => setLocation(e.target.value)}
