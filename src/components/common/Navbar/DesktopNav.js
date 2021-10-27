@@ -21,14 +21,14 @@ export default function DesktopNav() {
       payload: {
         token: "",
         user: {
-          firstname: "",
-          lastname: "",
+          first_name: "",
+          last_name: "",
           email: "",
-          profile_pic: "",
+          state: "",
+          address: "",
           username: "",
-          gender: "",
-          age: "",
-          about: "",
+          isFeeder: "",
+          phone: "",
         },
       },
     });
@@ -38,14 +38,18 @@ export default function DesktopNav() {
   if (userStore.token === "") {
     return (
       <div className="navbarWrapper">
-        
-        <Box justifyContent="space-around" className="navbar-row" >
-        
-          <Box cursor="pointer" onClick={() => handleRouteChange("/")}>Home</Box>
+        <Box justifyContent="space-around" className="navbar-row">
+          <Box cursor="pointer" onClick={() => handleRouteChange("/")}>
+            Home
+          </Box>
 
-          <Box cursor="pointer" onClick={() => handleRouteChange("/login")}>Login</Box>
+          <Box cursor="pointer" onClick={() => handleRouteChange("/login")}>
+            Login
+          </Box>
 
-          <Box cursor="pointer" onClick={() => handleRouteChange("/register")}>Register</Box>
+          <Box cursor="pointer" onClick={() => handleRouteChange("/register")}>
+            Register
+          </Box>
         </Box>
       </div>
     );
@@ -56,7 +60,7 @@ export default function DesktopNav() {
         <div className="nav-col">Logo</div>
         <div className="nav-col col-center">
           <Link to="/home">Home</Link>
-          <Link >Feeders</Link>
+          <Link>Feeders</Link>
           <Link to="profile">Profile</Link>
         </div>
         <div className="nav-col col-right">

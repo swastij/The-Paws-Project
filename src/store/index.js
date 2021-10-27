@@ -13,14 +13,14 @@ const initialState = {
     userStore: {
         token: '',
         user: {
-            firstname: '',
-            lastname: '',
+            first_name: '',
+            last_name: '',
             email: '',
-            profile_pic: '',
+            state: '',
+            address: '',
             username: '',
-            gender: '',
-            age: '',
-            about: ''
+            isFeeder: '',
+            phone: ''
         },
     },
     posts: [],
@@ -61,7 +61,7 @@ function reducer(state, {
 }
 
 const persistConfig = {
-    key: 'learningReact',
+    key: 'pawsProject',
     storage,
 }
 

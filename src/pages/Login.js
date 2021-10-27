@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { login } from "../api/user";
 import {
   Input,
@@ -8,22 +8,22 @@ import {
   Grid,
   Center,
   Box,
-  Heading
+  Heading,
 } from "@chakra-ui/react";
-import {Link} from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import {useDispatch} from 'react-redux';
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 
-import catdog from '../assets/catdog.jpg';
+import catdog from "../assets/catdog.jpg";
 
 export default function Login() {
   const dispatch = useDispatch();
-  const history= useHistory();
+  const history = useHistory();
   const status = useRef();
   const usernameRef = useRef();
   const passwordRef = useRef();
-  
+
   const handleLoginUser = async () => {
     try {
       const user = {
@@ -31,32 +31,33 @@ export default function Login() {
         password: passwordRef.current.value,
       };
       const res = await login(user);
-      dispatch({type: 'SAVE_USER', payload: res});
+      console.log(res);
+      dispatch({ type: "SAVE_USER", payload: res });
       status.current.innerHTML = "Logged In";
-      history.push('/home');
-
+      history.push("/home");
     } catch (e) {
-        status.current.innerHTML = e.response.data;
-      }
+      console.log(e);
+      // status.current.innerHTML = e.response.data;
     }
-  
+  };
 
   return (
-    <Box  w="100%">
-      
+    <Box w="100%">
       <Grid h="100%" templateColumns="repeat(2, 1fr)" gap={0}>
-        <Box w="100%" display="flex" alignItems="center" justifyContent="center">
-        
-        <Box w="80%">
-        <img src={catdog} />
-        </Box>
+        <Box
+          w="100%"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+        >
+          <Box w="80%">
+            <img src={catdog} />
+          </Box>
         </Box>
         <Box>
           <Center h="100%" w="100%">
             <VStack w="80%">
-              <Heading>
-                  LOGIN
-              </Heading>
+              <Heading>LOGIN</Heading>
               <Spacer />
               <Spacer />
               <Input
@@ -66,7 +67,7 @@ export default function Login() {
                 size="md"
               />
               <Spacer />
-             
+
               <Input
                 ref={passwordRef}
                 variant="outline"
@@ -74,7 +75,7 @@ export default function Login() {
                 size="md"
               />
               <Spacer />
-              
+
               <Button
                 isFullWidth={true}
                 onClick={handleLoginUser}
@@ -85,14 +86,15 @@ export default function Login() {
               </Button>
               <Link to="/forgot-password">Forgot password?</Link>
               <Center w="100%">
-      <p style={{"color": "red", "fontSize" : "20px", "margin": "12px"}} ref={status}></p>
-      </Center>
+                <p
+                  style={{ color: "red", fontSize: "20px", margin: "12px" }}
+                  ref={status}
+                ></p>
+              </Center>
             </VStack>
           </Center>
         </Box>
       </Grid>
-
-      
     </Box>
   );
 }

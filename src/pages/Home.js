@@ -88,11 +88,9 @@ export default function Home() {
   }, [userStore]);
 
   useEffect(()=>{
-    
-    if(allPosts.length > 0){
-    console.log("pro pic ", allPosts[0].user);
-    }
+
   }, [allPosts]);
+
   return (
     <Box
       p={4}
@@ -143,16 +141,17 @@ export default function Home() {
       {
         allPosts && allPosts.map((post, index) => (
           <PostCard
-            whichPage={0}
             key={0}
-            postId={1}
-            user={{
-              username: "test"
-            }}
-            caption={"test"}
-            createdAt={new Date().toDateString()}
-            media={null}
-            mediaType={0}
+            postId={post._id}
+            author={post.author}
+            name={post.name}
+            edited={post.edited}
+            images={post.images}
+            gender={post.gender}
+            breed={post.breed}
+            isVaccinated={post.isVaccinated}
+            isDewormed={post.isDewormed}
+            animal_type={post.animal_type}
           />  
         ))}
     </Box>

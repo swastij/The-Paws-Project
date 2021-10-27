@@ -7,7 +7,7 @@ export const getAllPosts = async ({
     token
 }) => {
     try {
-        const res = await JSONClient.get('/post/', {
+        const res = await JSONClient.get('/posts/', {
             headers: {
                 Authorization: token
             }

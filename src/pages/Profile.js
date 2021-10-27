@@ -12,6 +12,8 @@ import { Button, Image, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useHistory } from "react-router";
 import { useEffect, useState } from "react";
+import propic from "../assets/propic.jpg";
+
 export default function Profile() {
   const userStore = useSelector((store) => store.userStore);
   const history = useHistory();
@@ -55,7 +57,7 @@ export default function Profile() {
         <Image
           borderRadius="full"
           boxSize="350px"
-          src={`http://localhost:5000/file/${userStore.user.profile_pic}`}
+          src={propic}
           alt={userStore.user.firstname}
         />
       </Flex>
