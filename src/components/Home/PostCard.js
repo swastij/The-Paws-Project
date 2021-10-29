@@ -3,8 +3,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { GoKebabVertical } from "react-icons/all";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { RWebShare } from "react-web-share";
+import { Button } from "@chakra-ui/button";
 
 const PostCard = ({
+  postId,
   author,
   name,
   animal_type,
@@ -30,6 +33,7 @@ const PostCard = ({
 
   useEffect(() => {
     if (userStore.token) {
+      console.log(userStore);
     }
   }, [userStore]);
 
@@ -61,7 +65,7 @@ const PostCard = ({
               width: "50px",
               borderRadius: "50%",
             }}
-            src={`https://ui-avatars.com/api/?name=${author.username}`}
+            src={`https://ui-avatars.com/api/?name=${author.first_name+author.last_name}`}
             alt="author"
           />
           <Box marginLeft="8px">
@@ -86,10 +90,32 @@ const PostCard = ({
       </Box>
       {images.length > 0 && (
         <Box display="flex" justifyContent="center" alignItems="center">
-          <img src={images[0].url} alt="media" />
+          <img style={{
+              objectFit: "cover",
+              height: "650px",
+              width: "100%",
+            }} src={images[0].url} alt="media" />
         </Box>
       )}
-      <Box p={4}> {name} </Box>
+      
+      <Box p={2}> NAME: {name}</Box>
+      <Box p={2}> TYPE: {animal_type} </Box>
+      <Box p={2}> BREED: {breed} </Box>
+      <Box p={2}> VACCINATED`: {isVaccinated? "YES" : "NO"} </Box>
+      <Box p={2}> DEWORMED: {isDewormed? "YES" : "NO"} </Box>
+      <Box p={2}> GENDER: {gender} </Box>
+      <Button >
+      <RWebShare
+        data={{
+          text: "Hey! Help me in finding forever home",
+          url: `http://localhost:3000/posts/${postId}`,
+          title: "Adopt me!",
+        }}
+        onClick={() => console.log("shared successfully!")}
+      >
+        <button>Share 🔗</button>
+      </RWebShare>
+      </Button>
     </Box>
   );
 };

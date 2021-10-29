@@ -32,19 +32,11 @@ export const getProfileById = async (id, token) => {
   }
 };
 export const edit = async (user, token) => {
+  console.log(user)
   try {
-    console.log(user.profile_pic);
-    var mediaID = "";
-    if (user.profile_pic) {
-      const formData = new FormData();
-      formData.append("file", user.profile_pic);
-      const mediaRes = await FORMClient.post("/file/upload", formData);
-      mediaID = mediaRes.data;
-      user.profile_pic = mediaID;
-    }
-    const res = await JSONClient.put("/user/edit", user, {
+    const res = await URLEncodedClient.put(`/users/${user.id}`, qs.stringify(user), {
       headers: {
-        Authorization: token,
+        Authorization: `Bearer ${token}`,
       },
     });
     return res.data;

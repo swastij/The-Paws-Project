@@ -3,8 +3,9 @@ import "./Navbar.css";
 
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, Link } from "react-router-dom";
+import {Image} from "@chakra-ui/react";
 import { Center, Box } from "@chakra-ui/layout";
-
+import propic from "../../../assets/propic.jpg"
 export default function DesktopNav() {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -57,7 +58,10 @@ export default function DesktopNav() {
   return (
     <div className="navbarWrapperAuthed">
       <div className="navbar-row">
-        <div className="nav-col">Logo</div>
+        <div className="nav-col">
+          <Image borderRadius="50%" h="70px" w="70px" src={propic}></Image>
+
+        </div>
         <div className="nav-col col-center">
           <Link to="/home">Home</Link>
           <Link>Feeders</Link>
@@ -69,8 +73,8 @@ export default function DesktopNav() {
             src={`http://localhost:5000/file/${userStore.user.profile_pic}`}
             alt="dp"
           /> */}
-          <p>{userStore.user.username}</p>
-          <p onClick={handleLogout}>Logout</p>
+         <Link to="profile">{userStore.user.username}</Link>
+          <p style={{cursor: "pointer"}} onClick={handleLogout}>Logout</p>
         </div>
       </div>
     </div>

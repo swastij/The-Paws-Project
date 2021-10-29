@@ -57,7 +57,7 @@ export default function Profile() {
         <Image
           borderRadius="full"
           boxSize="350px"
-          src={propic}
+          src={`https://ui-avatars.com/api/?name=${userStore.user.first_name+userStore.user.last_name}`}
           alt={userStore.user.firstname}
         />
       </Flex>
@@ -68,21 +68,25 @@ export default function Profile() {
           <Box style={{backgroundColor: "	lavender", borderRadius: "8px", width: "80%", display: "flex", flexDirection:"column", justifyContent:"center", alignItems: "center"}}>
          
           <div style={{ height: 12 }}></div>
-        <Text fontSize="lg" color="purple">
-          {userStore.user.username} 
+        <Text fontSize="lg" color="purple" W="100%">
+          {userStore.user.user_name} 
         </Text>
         <div style={{ height: 12 }}></div>
         <Text fontSize="lg">
-          {userStore.user.firstname} {userStore.user.lastname}
+          {userStore.user.first_name} {userStore.user.last_name}
         </Text>
-        <Text fontSize="lg">{userStore.user.age}</Text>
-        <Text fontSize="lg" as="cite">
-          {userStore.user.about}
+        <Text fontSize="lg">EMAIL: {userStore.user.email}</Text>
+        <Text fontSize="lg">PHONE NUMBER: {userStore.user.phone}</Text>
+        <Text fontSize="lg" >
+          ADDRESS: {userStore.user.address}
         </Text>
-        <Text fontSize="lg">{userStore.user.location}</Text>{" "}
+        <Text fontSize="lg">STATE: {userStore.user.state}</Text>{" "}
+        <Text fontSize="lg" >
+          {userStore.user.isFeeder? "FEEDER" : "NOT A FEEDER"}
+        </Text>
         <div style={{ height: 8 }}></div>
         </Box>
-      
+        
         <div style={{ height: 16 }}></div>
       
       <Button style={{width:"80%"}} onClick={handleEditProfile} colorScheme="purple" w="150px">
@@ -90,13 +94,6 @@ export default function Profile() {
       </Button>
       <div style={{ height: 16 }}></div>
 
-      <Button style={{width:"80%"}} colorScheme="purple" w="300px">
-          Settings
-        </Button>
-        <div style={{ height: 16 }}></div>
-        <Button style={{width:"80%"}} onClick={handleChangePassword} colorScheme="purple" w="300px">
-          Change Password
-        </Button>
     
       </Flex>
     </Flex>

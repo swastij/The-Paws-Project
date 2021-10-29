@@ -30,6 +30,10 @@
   color: white;
 }
 
+select > option {
+  /* color: gray; */
+}
+
 .App-link {
   color: #61dafb;
 }
