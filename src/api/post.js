@@ -34,12 +34,22 @@ export const createPost2 = async (post, token) => {
   }
 };
 
-
-export const ViewPost= async (id)=>{
-  try{
-    const res= await JSONClient.get(`posts/${id}`);
+export const viewPost = async (id) => {
+  try {
+    const res = await JSONClient.get(`posts/${id}`);
     return res.data;
-  }catch(e){
+  } catch (e) {
     throw e;
   }
-}
+};
+
+export const deletePost = async (id, token) => {
+  try {
+    const res = await JSONClient.delete(`/posts/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return res.data;
+  } catch (e) {
+    throw e;
+  }
+};

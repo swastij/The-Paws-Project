@@ -13,7 +13,7 @@ import EditProfile from "./pages/EditProfile";
 import Feeders from "./pages/Feeders"
 import Post from "./pages/Post";
 import ShowProfile from "./pages/ShowProfile";
-import { ViewPost } from "./api/post";
+import ViewPost from "./pages/ViewPost";
 
 function App() {
   const userStore = useSelector((store) => store.userStore);
@@ -27,6 +27,9 @@ function App() {
       <DesktopNav />
       {userStore.token != "" && userStore.token != null ? (
         <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
           <Route path="/home">
             <Home />
           </Route>
@@ -54,7 +57,7 @@ function App() {
           <Route path="/feeders">
             <Feeders />
           </Route>
-          <Route path="/post/:id" children={<Post />} />
+          {/* <Route path="/post/:id" children={<Post />} /> */}
         </Switch>
       ) : (
         <Switch>

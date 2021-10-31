@@ -216,6 +216,7 @@ export default function Home() {
             isVaccinated={post.isVaccinated}
             isDewormed={post.isDewormed}
             animal_type={post.animal_type}
+            onDeleted={fetchAllPosts}
           />
         ))}
     </Box>
