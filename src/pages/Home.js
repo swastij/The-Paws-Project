@@ -213,10 +213,12 @@ export default function Home() {
             images={post.images}
             gender={post.gender}
             breed={post.breed}
+            age={post.age}
             isVaccinated={post.isVaccinated}
             isDewormed={post.isDewormed}
             animal_type={post.animal_type}
             onDeleted={fetchAllPosts}
+            onEdited={fetchAllPosts}
           />
         ))}
     </Box>
