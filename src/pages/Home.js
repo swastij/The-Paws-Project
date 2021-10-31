@@ -94,7 +94,7 @@ export default function Home() {
         boxShadow="lg"
         marginBottom="16px"
         borderRadius={8}
-        h="400px"
+        h="440px"
         w="100%"
       >
         <Box m={2} marginTop={4}>

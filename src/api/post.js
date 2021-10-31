@@ -34,102 +34,12 @@ export const createPost2 = async (post, token) => {
   }
 };
 
-// export const createPost = async ({
-//     token,
-//     caption,
-//     media,
-//     location,
-//     mediaType
-// }) => {
-//     try {
-//         var mediaID = ""
-//         const res = await JSONClient.post("/posts", {
-//             caption,
-//             location,
-//             media: mediaID,
-//             mediaType
-//         }, {
-//             headers: {
-//                 Authorization: token
-//             }
-//         })
-//         console.log(res.data)
-//         return res.data;
-//     } catch (e) {
 
-//     }
-// }
-
-export const createComment = async ({ token, post, text }) => {
-  try {
-    const res = await JSONClient.post(
-      "/comment/create",
-      {
-        post,
-        text,
-      },
-      {
-        headers: {
-          Authorization: token,
-        },
-      }
-    );
+export const ViewPost= async (id)=>{
+  try{
+    const res= await JSONClient.get(`posts/${id}`);
     return res.data;
-  } catch (e) {}
-};
-
-export const getComments = async ({ post, token }) => {
-  try {
-    const res = await JSONClient.get(`/comment/${post}`, {
-      headers: {
-        Authorization: token,
-      },
-    });
-    return res.data;
-  } catch (e) {}
-};
-
-export const createLike = async ({ post, token }) => {
-  try {
-    const res = await JSONClient.post(
-      "/like/add",
-      {
-        post,
-      },
-      {
-        headers: {
-          Authorization: token,
-        },
-      }
-    );
-    return res.data;
-  } catch (e) {}
-};
-
-export const removeLike = async ({ post, token }) => {
-  try {
-    const res = await JSONClient.post(
-      "/like/delete",
-      {
-        post,
-      },
-      {
-        headers: {
-          Authorization: token,
-        },
-      }
-    );
-    return res.data;
-  } catch (e) {}
-};
-
-export const getLikes = async ({ post, token }) => {
-  try {
-    const res = await JSONClient.get(`/like/${post}`, {
-      headers: {
-        Authorization: token,
-      },
-    });
-    return res.data;
-  } catch (e) {}
-};
+  }catch(e){
+    throw e;
+  }
+}

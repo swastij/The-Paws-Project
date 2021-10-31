@@ -10,9 +10,10 @@ import DeletePosts from "./pages/DeletePosts";
 import DesktopNav from "./components/common/Navbar/DesktopNav";
 import Profile from "./pages/Profile";
 import EditProfile from "./pages/EditProfile";
-
+import Feeders from "./pages/Feeders"
 import Post from "./pages/Post";
 import ShowProfile from "./pages/ShowProfile";
+import { ViewPost } from "./api/post";
 
 function App() {
   const userStore = useSelector((store) => store.userStore);
@@ -41,11 +42,17 @@ function App() {
           <Route path="/user/:id">
             <ShowProfile />
           </Route>
+          <Route path="/posts/:id">
+            <ViewPost />
+          </Route>
           <Route path="/deleteposts">
             <DeletePosts />
           </Route>
           <Route path="/editprofile">
             <EditProfile />
+          </Route>
+          <Route path="/feeders">
+            <Feeders />
           </Route>
           <Route path="/post/:id" children={<Post />} />
         </Switch>

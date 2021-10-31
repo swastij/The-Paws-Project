@@ -90,7 +90,7 @@ export default function EditProfile() {
   return (
     <Box w="100%">
       <Grid h="100%" templateColumns="repeat(2, 1fr)" gap={0}>
-        <Box display="flex" alignItems="center" justifyContent="center">
+        <Box  display="flex" alignItems="center" justifyContent="center">
           <Image
             ref={imgRef}
             borderRadius="full"
@@ -100,7 +100,6 @@ export default function EditProfile() {
             }`}
             alt={userStore.user.first_name}
           />
-          <Spacer />
         </Box>
 
         <Box>

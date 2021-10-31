@@ -45,19 +45,47 @@ export default function ShowProfile() {
   return (
     <Flex direction="row" marginTop="100px" justify="space-between" w="100%">
       {user && (
-        <Flex justify="center" w="100%">
-          <img
-            style={{
-              objectFit: "cover",
-              height: "50px",
-              width: "50px",
-              borderRadius: "50%",
-            }}
-            src={`https://ui-avatars.com/api/?name=${user.username}`}
-            alt="author"
+        <Flex direction="row" marginTop="100px" justify="space-between" w="100%">
+
+        <Flex justify="center" w="50%">
+          <Image
+            borderRadius="full"
+            boxSize="350px"
+            src={`https://ui-avatars.com/api/?name=${user.first_name+user.last_name}`}
+            alt={user.firstname}
           />
-          <h1>{user.username}</h1>
         </Flex>
+        <Flex direction="column" align="start" w="50%">
+         
+          <div style={{ height: 12 }}></div>
+  
+            <Box style={{backgroundColor: "	lavender", borderRadius: "8px", width: "80%", display: "flex", flexDirection:"column", justifyContent:"center", alignItems: "center"}}>
+           
+            <div style={{ height: 12 }}></div>
+          <Text fontSize="lg" color="purple" W="100%">
+            {user.user_name} 
+          </Text>
+          <div style={{ height: 12 }}></div>
+          <Text fontSize="lg">
+            {user.first_name} {user.last_name}
+          </Text>
+          <Text fontSize="lg">EMAIL: {user.email}</Text>
+          <Text fontSize="lg">PHONE NUMBER: {user.phone}</Text>
+          <Text fontSize="lg" >
+            ADDRESS: {user.address}
+          </Text>
+          <Text fontSize="lg">STATE: {user.state}</Text>{" "}
+          <Text fontSize="lg" >
+            {user.isFeeder? "FEEDER" : "NOT A FEEDER"}
+          </Text>
+          <div style={{ height: 8 }}></div>
+          </Box>
+          
+        <div style={{ height: 16 }}></div>
+  
+      
+        </Flex>
+      </Flex>
       )}
     </Flex>
   );
