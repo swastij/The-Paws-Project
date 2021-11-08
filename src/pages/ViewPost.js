@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { viewPost } from "../api/post";
 import PostCard from "../components/Home/PostCard";
+import moment  from "moment";
 const ViewPost = () => {
   const [post, setPost] = React.useState(null);
   const userStore = useSelector(state => state.userStore);
@@ -39,7 +40,7 @@ const ViewPost = () => {
           postId={post?._id}
           author={post?.author}
           name={post?.name}
-          edited={post?.edited}
+          created={post?.created}
           images={post?.images}
           gender={post?.gender}
           breed={post?.breed}

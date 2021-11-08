@@ -65,7 +65,7 @@ export default function DesktopNav() {
         <div className="nav-col col-center">
           <Link to="/home">Home</Link>
           <Link to="/feeders">Feeders</Link>
-          <Link to="profile">Profile</Link>
+          <Link to="/profile">Profile</Link>
         </div>
         <div className="nav-col col-right">
           {/* <img

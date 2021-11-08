@@ -23,10 +23,12 @@ export default function Home() {
   const [isDewormed, setIsDewormed] = useState(null);
   const [isVaccinated, setIsVaccinated] = useState(null);
   const [gender, setGender] = useState(null);
-  const inputRef = useRef();
-  const imgRef = useRef();
-
   const [selectedFile, setSelectedFile] = useState(null);
+  const imgRef= useRef();
+  const clearForm = () => {
+    window.location.reload()
+
+  };
 
   const handleCreatePost = async () => {
     if (userStore.token) {
@@ -43,11 +45,11 @@ export default function Home() {
         };
         const res = await createPost2(post, userStore.token);
         fetchAllPosts();
-        setSelectedFile(null);
       } catch (e) {
         console.log(e);
         toast.error("An error occurred");
       }
+      clearForm()
     }
   };
 
@@ -116,6 +118,7 @@ export default function Home() {
             onChange={(e) => setGender(e.target.value)}
             placeholder="Gender"
             h="40px"
+
           />
         </Box>
         <Box m={2}>
@@ -123,6 +126,7 @@ export default function Home() {
             onChange={(e) => setAge(e.target.value)}
             placeholder="Age"
             h="40px"
+
           />
         </Box>
         <Box m={2}>
@@ -209,7 +213,7 @@ export default function Home() {
             postId={post._id}
             author={post.author}
             name={post.name}
-            edited={post.edited}
+            created={post.created}
             images={post.images}
             gender={post.gender}
             breed={post.breed}

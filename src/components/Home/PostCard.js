@@ -6,7 +6,7 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import { RiImageAddFill, RiVideoAddFill } from "react-icons/ri";
-
+import moment from 'moment'
 import React, { useEffect, useRef, useState } from "react";
 import { GoKebabVertical } from "react-icons/all";
 import { useHistory } from "react-router-dom";
@@ -26,7 +26,7 @@ const PostCard = ({
   gender,
   isVaccinated,
   isDewormed,
-  edited,
+  created,
   images,
   onDeleted,
   onEdited,
@@ -45,6 +45,17 @@ const PostCard = ({
   const [deleteText, setDeleteText] = useState("Delete");
   const userStore = useSelector((store) => store.userStore);
   const [selectedFile, setSelectedFile] = useState(null);
+
+
+  useEffect(() => {
+    setName(name);
+    setAge(age);
+    setAnimalType(animal_type);
+    setBreed(breed);
+    setIsDewormed(isDewormed);
+    setIsVaccinated(isVaccinated);
+    setGender(gender)
+  }, [postId])
 
   const handleDelete = async () => {
     setDeleteText("Deleting...");
@@ -84,7 +95,9 @@ const PostCard = ({
   const handleShowUser = () => {
     history.push(`/user/${author._id}`);
   };
-
+  const handleViewPost= ()=>{
+    history.push(`posts/${postId}`);
+  }
   return (
     <Box
       boxShadow="lg"
@@ -99,6 +112,8 @@ const PostCard = ({
         display="flex"
         justifyContent="space-between"
         alignItems="center"
+        cursor="pointer"
+        onClick={handleViewPost}
       >
         <Box
           display="flex"
@@ -121,7 +136,7 @@ const PostCard = ({
           />
           <Box marginLeft="8px">
             <p>{author.username}</p>
-            <p style={{ fontSize: 10 }}>{edited}</p>
+            <p style={{ fontSize: 10 }}>{moment(new Date(created)).fromNow()}</p>
           </Box>
         </Box>
         <Box>
@@ -143,10 +158,10 @@ const PostCard = ({
                 variant="outline"
               />
               <MenuList>
-                <MenuItem onClick={() => setIsEditing(true)}>
-                  Edit
-                </MenuItem>
-                <MenuItem>Report</MenuItem>
+                {author._id == userStore.user._id && (
+                  <MenuItem onClick={() => setIsEditing(true)}>Edit</MenuItem>
+                )}
+                {author._id != userStore.user._id && <MenuItem>Report</MenuItem>}
               </MenuList>
             </Menu>
           </Box>

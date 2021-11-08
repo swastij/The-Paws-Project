@@ -36,7 +36,9 @@ export const createPost2 = async (post, token) => {
 
 export const editPost = async (post, token) => {
   var data = new FormData();
+
   data.append("image", post.image);
+ 
   data.append("post[name]", post.name);
   data.append("post[animal_type]", post.animal_type);
   data.append("post[breed]", post.breed);
@@ -44,14 +46,17 @@ export const editPost = async (post, token) => {
   data.append("post[gender]", post.gender);
   data.append("post[isVaccinated]", post.isVaccinated);
   data.append("post[isDewormed]", post.isDewormed);
+  console.log(data);
   try {
     const res = await FORMClient.put(`/posts/${post.id}`, data, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log(res);
     return res.data;
   } catch (e) {
+    console.log(e);
     throw e;
   }
 };
