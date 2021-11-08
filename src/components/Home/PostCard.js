@@ -112,8 +112,7 @@ const PostCard = ({
         display="flex"
         justifyContent="space-between"
         alignItems="center"
-        cursor="pointer"
-        onClick={handleViewPost}
+        
       >
         <Box
           display="flex"
@@ -168,11 +167,12 @@ const PostCard = ({
         </Box>
       </Box>
       {images.length > 0 && (
-        <Box display="flex" justifyContent="center" alignItems="center">
+        <Box display="flex" justifyContent="center" alignItems="center" cursor="pointer"
+        onClick={handleViewPost}>
           <img
             style={{
               objectFit: "cover",
-              height: "650px",
+              height: "450px",
               width: "100%",
             }}
             src={images[0].url}
@@ -187,7 +187,7 @@ const PostCard = ({
               onChange={(e) => setName(e.target.value)}
               placeholder="Name of the animal"
               value={editname}
-              h="40px"
+              h="32px"
             />
           </Box>
           <Box m={2}>
