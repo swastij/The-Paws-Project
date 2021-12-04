@@ -37,6 +37,7 @@ export default function Register() {
   let button;
   const history = useHistory();
   const handleCreateUser = async () => {
+    status.current.innerHTML ='';
     setLoading(true);
     try {
       const user = {
@@ -56,8 +57,11 @@ export default function Register() {
       status.current.innerHTML = "Account created";
       history.push("/home");
     } catch (e) {
-      console.log(e);
-      status.current.innerHTML = e.response?.data?.message;
+      if (Object.keys(e.response.data).length > 0) {
+        status.current.innerHTML = Object.values(e.response.data)[0]
+      }else{
+        status.current.innerHTML = "An unexpected error has occurred"
+      }
       setLoading(false);
     }
   };

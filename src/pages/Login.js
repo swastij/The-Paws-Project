@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { login } from "../api/user";
 import {
   Input,
@@ -23,8 +23,11 @@ export default function Login() {
   const status = useRef();
   const usernameRef = useRef();
   const passwordRef = useRef();
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handleLoginUser = async () => {
+    status.current.innerHTML ='';
+    setIsProcessing(true);
     try {
       const user = {
         username: usernameRef.current.value,
@@ -37,8 +40,14 @@ export default function Login() {
       history.push("/home");
     } catch (e) {
       console.log(e);
+      if (Object.keys(e?.response?.data).length > 0) {
+        status.current.innerHTML = Object.values(e?.response?.data)[0];
+      } else {
+        status.current.innerHTML = "An unexpected error has occurred";
+      }
       // status.current.innerHTML = e.response.data;
     }
+    setIsProcessing(false);
   };
 
   return (
@@ -82,7 +91,7 @@ export default function Login() {
                 colorScheme="cyan"
                 size="md"
               >
-                Login
+               {isProcessing ? 'Please wait...' :  'Login'}
               </Button>
               <Link to="/forgot-password">Forgot password?</Link>
               <Center w="100%">
