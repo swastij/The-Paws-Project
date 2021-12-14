@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import propic from "../assets/propic.jpg";
 import { getAllPosts } from "../api/post";
 import PhotoCard from "../components/Home/PhotoCard";
+import { getProfileById } from "../api/user";
 
 export default function Profile() {
   const userStore = useSelector((store) => store.userStore);
@@ -28,31 +29,13 @@ export default function Profile() {
     history.push("/editprofile");
   }
   // useEffect(()=>{setUser(user)},[])
-  const handleSendNotification = async () => {
-    await axios.post(
-      "https://fcm.googleapis.com/fcm/send",
-      {
-        data: {
-          title: "Someone liekd your post",
-          message: "body",
-          key1: "val1",
-        },
-        to: "ezJ6T1AjAf4CeJr2vxkdto:APA91bFMCYiQHdBTt-GNNKxknKZkm_NMxx6utV-XB1m8km_JTIduBLJ-MyUCWQUwfaujmH6QlmbVNGwYPxUdckTq4ot_ojX_lU45ZUNl_AXqKWzHaXSeKMdIIZk7cBGsLhx3T3EepShE",
-      },
-      {
-        headers: {
-          Authorization:
-            "key=AAAAxu9sbNw:APA91bH-Y9S2XJ3uiOj552zkJ4RVBwkCEe2k3fUZB7y1AiYyshve0qgJz_PiFoWm8dfqvI9RSokL4T8ZvzXWSzwSYrLpVbTp3VE2QT5BlbRkfTTTN34KggDBKklydGmwJJhBTKA5fwKI",
-        },
-      }
-    );
-  };
 
   const fetchAllPosts = async () => {
     if (userStore.token) {
       try {
-        const posts = await getAllPosts({ token: userStore.token });
-        setPosts(posts);
+        const posts = await getProfileById(userStore.user._id, userStore.token);
+        console.log("profile here", posts);
+        setPosts(posts.posts);
       } catch (e) {
         console.log(e);
       }
@@ -64,9 +47,9 @@ export default function Profile() {
   useEffect(() => {
     if (userStore.token) fetchAllPosts();
   }, [userStore]);
-  const handleChangePassword = () => {
-    history.push("/change-password");
-  };
+  // const handleChangePassword = () => {
+  //   history.push("/change-password");
+  // };
   return (
     <div>
       <Flex direction="row" margin="0 auto" justifyContent="space-between" marginTop="100px"  w="70%">
@@ -126,7 +109,7 @@ export default function Profile() {
         </Flex>
       </Flex>
       <Grid width="70%" margin="0 auto" marginTop={12}>
-        <h1 style={{fontSize: 24}}><b>Posts</b></h1>
+        <h1 style={{fontSize: 24}}><b>Posts - {posts.length}</b></h1>
       </Grid>
       <Grid
         width="70%"

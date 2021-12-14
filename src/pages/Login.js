@@ -25,8 +25,12 @@ export default function Login() {
   const passwordRef = useRef();
   const [isProcessing, setIsProcessing] = useState(false);
 
+  const sleep = async (ms) => {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  };
+
   const handleLoginUser = async () => {
-    status.current.innerHTML ='';
+    status.current.innerHTML = "";
     setIsProcessing(true);
     try {
       const user = {
@@ -34,16 +38,18 @@ export default function Login() {
         password: passwordRef.current.value,
       };
       const res = await login(user);
-      console.log(res);
       dispatch({ type: "SAVE_USER", payload: res });
-      status.current.innerHTML = "Logged In";
       history.push("/home");
     } catch (e) {
-      console.log(e);
-      if (Object.keys(e?.response?.data).length > 0) {
-        status.current.innerHTML = Object.values(e?.response?.data)[0];
-      } else {
-        status.current.innerHTML = "An unexpected error has occurred";
+      if (e?.response) {
+        if (Object.keys(e?.response?.data).length > 0) {
+          status.current.innerHTML = Object.values(e?.response?.data)[0];
+        } else {
+          status.current.innerHTML = "An unexpected error has occurred";
+        }
+      }
+      else{
+        console.log(e);
       }
       // status.current.innerHTML = e.response.data;
     }
@@ -91,7 +97,7 @@ export default function Login() {
                 colorScheme="cyan"
                 size="md"
               >
-               {isProcessing ? 'Please wait...' :  'Login'}
+                {isProcessing ? "Please wait..." : "Login"}
               </Button>
               <Link to="/forgot-password">Forgot password?</Link>
               <Center w="100%">

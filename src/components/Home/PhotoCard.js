@@ -8,7 +8,7 @@ const PhotoCard = ({ postId, images }) => {
   const history = useHistory();
 
   const handleViewPost = () => {
-    history.push(`posts/${postId}`);
+    history.push(`/posts/${postId}`);
   };
   return (
     <Box
